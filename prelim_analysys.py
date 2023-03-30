@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 array = []
-with open('data_Jan-Nov.csv', mode ='r')as file:
+with open('/home/harsh/Documents/combined_data.csv', mode ='r')as file:
    
   # reading the CSV file
   csvFile = csv.reader(file)
@@ -15,7 +15,7 @@ with open('data_Jan-Nov.csv', mode ='r')as file:
 
 #print(array)
 Ts=1
-tau = 2000
+tau = 2000000
 a = Ts/(2*tau+Ts)
 b=(2*tau-Ts)/(2*tau+Ts)
 out=[0]*len(array)
@@ -38,10 +38,11 @@ def movingAverage(n,data):
       averaged_data[i]=sum(array[0:i])/n
   return averaged_data
 
-avg_data=movingAverage(96*7*4,array)
+avg_data=movingAverage(96*100,array)
 
 
 plt.plot(array)
+
+plt.plot(np.subtract(np.array(array),np.array(avg_data)))
 plt.plot(avg_data)
-plt.plot(np.subtract(np.array(array),np.array(out)))
 plt.show()
